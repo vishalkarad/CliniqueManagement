@@ -2,7 +2,7 @@ package com.bridgelabz.services;
 
 import com.bridgelabz.pojo.Patients;
 
-public class PatientServices extends CliniiqueManagementMain {
+public class PatientServices extends CliniqueManagementMain {
 
     // Constructor
     public PatientServices(String filePath) {
@@ -14,4 +14,8 @@ public class PatientServices extends CliniiqueManagementMain {
         super.addRecord(patients);
     }
 
+    // Add search record
+    public String searchRecord(String serchValue) {
+        return super.searchRecord(serchValue);
+    }
 }

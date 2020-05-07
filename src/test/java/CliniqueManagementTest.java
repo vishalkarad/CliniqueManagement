@@ -29,4 +29,10 @@ public class CliniqueManagementTest {
         String result = doctor.addRecord(new Patients("P3", "rohan", "9874563216", 40));
         Assert.assertEquals("Add Records Successfully",result);
     }
+
+    @Test
+    public void givenPatientId_WhenSearch_ThenReturnSuccessMessage()  {
+        String result = patient.searchRecord("P2");
+        Assert.assertEquals("Search record",result);
+    }
 }

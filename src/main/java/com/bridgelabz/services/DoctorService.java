@@ -16,4 +16,8 @@ public class DoctorService extends CliniqueManagementMain {
     public String searchRecord(String serchValue) {
         return super.searchRecord(serchValue);
     }
+
+    public String listOfAllRecords(){
+        return super.listOfAllRecords();
+    }
 }

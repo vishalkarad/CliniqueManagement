@@ -55,6 +55,17 @@ public class CliniqueManagementMain implements CliniqueInterface {
         return "Record are not found";
     }
 
+    @Override
+    public String listOfAllRecords() {
+        try {
+            readFile().stream().forEach(value -> System.out.println(value.toString()));
+            return "Search record";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private <T> List<T> readFile() {
         try {
             if (file.length() == 0)

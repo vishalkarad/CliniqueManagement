@@ -3,5 +3,6 @@ package com.bridgelabz.interfaces;
 public interface CliniqueInterface {
 
     public <T> String addRecord(T object);
-    public String searchRecord(String id);
+    public String searchRecord(String serachValue);
+    public String listOfAllRecords();
 }

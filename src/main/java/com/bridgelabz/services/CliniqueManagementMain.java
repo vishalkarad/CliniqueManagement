@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class CliniqueManagementMain implements CliniqueInterface {
             if (file.length() > 0)
                 list = readFile();
             list.add(object);
-            saveRecord();
+            saveRecord(list);
             return "Add Records Successfully";
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,5 +49,10 @@ public class CliniqueManagementMain implements CliniqueInterface {
             e.printStackTrace();
         }
         return null;
+    }
+
+    // Save Records In File
+    public <T> void saveRecord(List<T> list) throws IOException {
+        mapper.writeValue(file, list);
     }
 }

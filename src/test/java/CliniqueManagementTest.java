@@ -35,4 +35,10 @@ public class CliniqueManagementTest {
         String result = patient.searchRecord("P2");
         Assert.assertEquals("Search record",result);
     }
+
+    @Test
+    public void givenDoctorId_WhenSearch_ThenReturnSuccessMessage()  {
+        String result = doctor.searchRecord("D102");
+        Assert.assertEquals("Search record",result);
+    }
 }

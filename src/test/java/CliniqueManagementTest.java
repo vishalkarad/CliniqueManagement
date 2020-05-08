@@ -14,16 +14,16 @@ public class CliniqueManagementTest {
 
     DoctorService doctor;
     PatientServices patient;
-
+    public String appointmentFilePath = "F:\\bridgelabze\\cliniqueManagementApplication\\src\\test\\resources\\appointment\\appointmentList.json";
     @Before
     public void setUp() {
-        doctor = new DoctorService("F:\\bridgelabze\\CliniqueManagement\\src\\test\\resources\\doctors\\doctorList.json");
-        patient = new PatientServices("F:\\bridgelabze\\CliniqueManagement\\src\\test\\resources\\patients\\patientList.json");
+        doctor = new DoctorService("F:\\bridgelabze\\cliniqueManagementApplication\\src\\test\\resources\\doctors\\doctorList.json");
+        patient = new PatientServices("F:\\bridgelabze\\cliniqueManagementApplication\\src\\test\\resources\\patients\\patientList.json");
     }
 
     @Test
     public void givenDoctorInformation_WhenAddDoctor_ThenReturnSuccessMessage() throws CliniqueException {
-        String result = doctor.addDoctorEntry(new Doctor("D102","shubham","8956561313","parli","PM","skin"));
+        String result = doctor.addDoctorEntry(new Doctor("D103","vaibhav","8956561313","parli","PM","skin"));
         Assert.assertEquals("Add Records Successfully",result);
     }
 
@@ -60,7 +60,14 @@ public class CliniqueManagementTest {
     @Test
     public void givenDoctorIdAndDate_WhenFixAppointment_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException {
         AppointmentService appoint = new AppointmentService();
-        String result = appoint.appointment("D101","07/08/2020");
+        String result = appoint.appointment("D103","P3","10/12/2020");
         Assert.assertEquals("Appointment fix",result);
+    }
+
+    @Test
+    public void givenDoctorId_WhenSearchDoctorPatient_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException {
+        DoctorService doctorService = new DoctorService(appointmentFilePath);
+        int result = doctorService.doctorPatientReport("D103");
+        Assert.assertEquals(1,result);
     }
 }

@@ -1,10 +1,9 @@
 package com.bridgelabz.services;
 
 import com.bridgelabz.exception.CliniqueException;
-import com.bridgelabz.pojo.AppointMent;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.bridgelabz.pojo.Appointment;
+import com.bridgelabz.pojo.Doctor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -16,58 +15,30 @@ import java.util.List;
 
 public class AppointmentService {
     // Variable
-    public static final String filePath = "F:\\bridgelabze\\CliniqueManagement\\src\\test\\resources\\appointment\\appointmentList.json";
+    public String filePath = "F:\\bridgelabze\\cliniqueManagementApplication\\src\\test\\resources\\appointment\\appointmentList.json";
     int count = 0;
 
     // Objects
-    List<AppointMent> list = new ArrayList();
+    List<Appointment> list = new ArrayList();
     ObjectMapper mapper = new ObjectMapper();
-    DoctorService doctor = new DoctorService("F:\\bridgelabze\\CliniqueManagement\\src\\test\\resources\\doctors\\doctorList.json");
+    CliniqueManagementMain main = new CliniqueManagementMain(filePath);
+    DoctorService doctor = new DoctorService("F:\\bridgelabze\\cliniqueManagementApplication\\src\\test\\resources\\doctors\\doctorList.json");
     File file;
 
     // Appointment
-    public String appointment(String doctor_id, String date) throws IOException, CliniqueException, ParseException {
-        compareDate(date); // Date in past then throw exception
-        list = readFile(filePath);
-        count = doctor.searchDoctorEntry(doctor_id);
+    public String appointment(String doctorId,String patientId, String date) throws IOException, CliniqueException, ParseException, ClassNotFoundException {
+        count = doctor.searchDoctorEntry(doctorId);
         if (count == 0)
             throw new CliniqueException(CliniqueException.MyException.INVALIED_ID, "This doctor are not present in clinique");
-        for (int index = 0; index < list.size(); index++) {
-            if (list.get(index).getAppointment_Date().compareTo(date) == 0) {
-                if (list.get(index).getAppointment_Date().compareTo(date) == 0 && list.get(index).getDoctor_id().compareTo(doctor_id) == 0
-                        && list.get(index).getAppointMent_Id() < 5) {
-                    list.get(index).setAppointMent_Id(list.get(index).getAppointMent_Id() + 1);
-                    saveRecord(list);
-                    return "Appointment fix";
-                }
-            } else
-                count++;
-            if (list.size() == count - 1) {
-                list.add(new AppointMent(0, doctor_id, date));
-                saveRecord(list);
-            }
+        compareDate(date); // Date in past then throw exception
+        availabilityTime(doctorId);
+        list = main.readFile(Appointment.class);
+        int noOfAppointMent = (int) list.stream().filter(value -> value.getAppointment_Date().compareTo(date)==0 && value.getDoctor_Id().compareTo(doctorId) == 0).count();
+        if (noOfAppointMent<5) {
+            main.addRecord(new Appointment(noOfAppointMent+1, doctorId, date,patientId),Appointment.class);
+            return "Appointment fix";
         }
-
         return "Appointment are not avalebale";
-    }
-
-    // Read Address book
-    public List<AppointMent> readFile(String file_path) {
-        try {
-            this.file = new File(file_path);
-            if (file.length() == 0)
-                throw new CliniqueException(CliniqueException.MyException.FILE_EMPTY, "File is Empty");
-            return mapper.readValue(file, new TypeReference<ArrayList<AppointMent>>() {
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    // Save Records In File
-    public void saveRecord(List<AppointMent> list) throws IOException {
-        mapper.writeValue(file, list);
     }
 
     // Date must be in future
@@ -78,5 +49,26 @@ public class AppointmentService {
         Date currentDate = format.parse(format.format(cal.getTime()));
         if (currentDate.after(appointmentDate))
             throw new CliniqueException(CliniqueException.MyException.INVALIED_APPOINTMENT_DATE, "This doctor are not present in clinique");
+    }
+
+    public void availabilityTime(String doctorId) throws IOException, ClassNotFoundException {
+        List<Doctor> doctorList = doctor.readFile(Doctor.class);
+        final String[] availability = {null};
+        doctorList.stream().forEach(value -> {
+            if(value.getDoctor_Id().compareTo(doctorId)==0){
+                availability[0] = value.getDoctor_Availability();
+            }
+        });
+        switch (availability[0]){
+            case "AM":
+                System.out.println("Dr. Available In 06am to 12am");
+                break;
+            case "PM":
+                System.out.println("Dr. Available In 12pm to 6pm");
+                break;
+            case "BOTH":
+                System.out.println("Dr. Available In Full Time");
+                break;
+        }
     }
 }

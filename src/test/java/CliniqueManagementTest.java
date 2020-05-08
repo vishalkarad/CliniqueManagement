@@ -74,4 +74,11 @@ public class CliniqueManagementTest {
         int result = doctorService.doctorPatientReport("D103");
         Assert.assertEquals(1,result);
     }
+
+    @Test
+    public void givenDoctor_WhenSearchPopularDoctor_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException, ClassNotFoundException {
+        String doctorId = doctor.popularDoctor();
+        int result = doctor.searchDoctorEntry(doctorId);
+        Assert.assertEquals(1,result);
+    }
 }

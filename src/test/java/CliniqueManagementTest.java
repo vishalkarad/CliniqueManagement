@@ -38,14 +38,50 @@ public class CliniqueManagementTest {
     }
 
     @Test
-    public void givenPatientId_WhenSearch_ThenReturnSuccessMessage()  {
+    public void givenPatientName_WhenSearch_ThenReturnNumberOfRecord()  {
+        int result = patient.searchPatientRecord("rohan");
+        Assert.assertEquals(1,result);
+    }
+
+    @Test
+    public void givenPatientId_WhenSearch_ThenReturnNumberOfRecord()  {
         int result = patient.searchPatientRecord("P3");
         Assert.assertEquals(1,result);
     }
 
     @Test
-    public void givenDoctorId_WhenSearch_ThenReturnSuccessMessage()  {
+    public void givenPatientMobileNumber_WhenSearch_ThenReturnNumberOfRecord()  {
+        int result = patient.searchPatientRecord("9874563216");
+        Assert.assertEquals(1,result);
+    }
+
+    @Test
+    public void givenPatientAge_WhenSearch_ThenReturnNumberOfRecord()  {
+        int result = patient.searchPatientRecord("40");
+        Assert.assertEquals(1,result);
+    }
+
+    @Test
+    public void givenDoctorId_WhenSearch_ThenReturnNumberOfRecord()  {
         int result = doctor.searchDoctorEntry("D101");
+        Assert.assertEquals(1,result);
+    }
+
+    @Test
+    public void givenDoctorName_WhenSearch_ThenReturnNumberOfRecord()  {
+        int result = patient.searchPatientRecord("sonal");
+        Assert.assertEquals(1,result);
+    }
+
+    @Test
+    public void givenDoctorMobileNumber_WhenSearch_ThenReturnNumberOfRecord()  {
+        int result = patient.searchPatientRecord("8956561414");
+        Assert.assertEquals(1,result);
+    }
+
+    @Test
+    public void givenDoctorAddress_WhenSearch_ThenReturnNumberOfRecord()  {
+        int result = patient.searchPatientRecord("parli");
         Assert.assertEquals(1,result);
     }
 

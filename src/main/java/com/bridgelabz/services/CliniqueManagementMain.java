@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CliniqueManagementMain implements CliniqueInterface {
 
@@ -40,21 +40,26 @@ public class CliniqueManagementMain implements CliniqueInterface {
         return null;
     }
 
-    @Override
     // Search Record
-    public String searchRecord(String id) {
+    @Override
+    public int searchRecord(String serchValue) {
         try {
-            String length = readFile().stream().filter(value -> value.toString().contains(id)).collect(Collectors.toList()).toString();
-            if (length!=null) {
-                System.out.println(length);
-                return "Search record";
-            }
+            AtomicInteger count = new AtomicInteger();
+            readFile().stream().forEach(value -> {
+                if (value.toString().contains(serchValue)) {
+                    System.out.println(value.toString());
+                    count.getAndIncrement();
+                }
+            });
+            return count.get();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Record are not found";
+        return 0;
     }
 
+    // Search whole list
     @Override
     public String listOfAllRecords() {
         try {
@@ -66,6 +71,7 @@ public class CliniqueManagementMain implements CliniqueInterface {
         return null;
     }
 
+    // Read file
     private <T> List<T> readFile() {
         try {
             if (file.length() == 0)

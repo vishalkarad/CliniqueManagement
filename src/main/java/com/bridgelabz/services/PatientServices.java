@@ -10,16 +10,17 @@ public class PatientServices extends CliniqueManagementMain {
     }
 
     // Add patient
-    public String  addPatient(Patients patients){
+    public String  addPatientEntry(Patients patients){
         return super.addRecord(patients);
     }
 
-    // Add search record
-    public String searchRecord(String serchValue) {
+    // search patient
+    public int searchPatientRecord(String serchValue) {
         return super.searchRecord(serchValue);
     }
 
-    public String listOfAllRecords(){
+    // list of all patientList
+    public String listOfAllPatientRecords(){
         return super.listOfAllRecords();
     }
 }

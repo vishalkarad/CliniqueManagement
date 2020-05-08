@@ -4,20 +4,23 @@ import com.bridgelabz.pojo.Doctor;
 
 public class DoctorService extends CliniqueManagementMain {
 
+    // constructor
     public DoctorService(String filePath) {
         super(filePath);
     }
 
-    public String addRecord(Doctor doctor){
+    // Add doctor record
+    public String addDoctorEntry(Doctor doctor){
         return super.addRecord(doctor);
     }
 
-    // Add search record
-    public String searchRecord(String serchValue) {
+    // search doctor record
+    public int searchDoctorEntry(String serchValue) {
         return super.searchRecord(serchValue);
     }
 
-    public String listOfAllRecords(){
+    // list of all doctor records
+    public String listOfAllDoctorRecords(){
         return super.listOfAllRecords();
     }
 }

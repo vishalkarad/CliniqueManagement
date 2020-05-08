@@ -2,11 +2,15 @@ import com.bridgelabz.exception.CliniqueException;
 import com.bridgelabz.interfaces.CliniqueInterface;
 import com.bridgelabz.pojo.Doctor;
 import com.bridgelabz.pojo.Patients;
+import com.bridgelabz.services.AppointmentService;
 import com.bridgelabz.services.DoctorService;
 import com.bridgelabz.services.PatientServices;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 public class CliniqueManagementTest {
 
@@ -46,5 +50,12 @@ public class CliniqueManagementTest {
     public void givenRecord_WhenSearchAllRecords_ThenReturnSuccessMessage()  {
         String result = doctor.listOfAllRecords();
         Assert.assertEquals("Search record",result);
+    }
+
+    @Test
+    public void givenDoctorIdAndDate_WhenFixAppointment_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException {
+        AppointmentService appoint = new AppointmentService();
+        String result = appoint.appointment("D101","07/08/2020");
+        Assert.assertEquals("Appointment fix",result);
     }
 }

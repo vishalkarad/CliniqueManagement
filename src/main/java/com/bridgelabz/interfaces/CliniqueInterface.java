@@ -1,8 +1,13 @@
 package com.bridgelabz.interfaces;
 
+import java.io.IOException;
+import java.util.List;
+
 public interface CliniqueInterface {
 
-    public <T> String addRecord(T object);
-    public int searchRecord(String serachValue);
-    public String listOfAllRecords();
+    public <T> String addRecord(T object,Class<?> className);
+    public  int searchRecord(String serchValue,Class<?> className);
+    public  String listOfAllRecords(Class<?> className);
+    public <T> List<T> readFile(Class<?> target) throws IOException, ClassNotFoundException;
+    public <T> void saveRecord(List<T> list) throws IOException;
 }

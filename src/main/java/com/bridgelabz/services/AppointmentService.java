@@ -22,13 +22,14 @@ public class AppointmentService {
     // Objects
     List<AppointMent> list = new ArrayList();
     ObjectMapper mapper = new ObjectMapper();
+    DoctorService doctor = new DoctorService("F:\\bridgelabze\\CliniqueManagement\\src\\test\\resources\\doctors\\doctorList.json");
     File file;
 
     // Appointment
     public String appointment(String doctor_id, String date) throws IOException, CliniqueException, ParseException {
         compareDate(date); // Date in past then throw exception
         list = readFile(filePath);
-        count = (int) list.stream().filter(value -> value.getDoctor_id().compareTo(doctor_id) == 0).count();
+        count = doctor.searchDoctorEntry(doctor_id);
         if (count == 0)
             throw new CliniqueException(CliniqueException.MyException.INVALIED_ID, "This doctor are not present in clinique");
         for (int index = 0; index < list.size(); index++) {
@@ -46,6 +47,7 @@ public class AppointmentService {
                 saveRecord(list);
             }
         }
+
         return "Appointment are not avalebale";
     }
 
@@ -73,7 +75,8 @@ public class AppointmentService {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date appointmentDate = format.parse(date);
-        if (cal.getTime().before(appointmentDate))
+        Date currentDate = format.parse(format.format(cal.getTime()));
+        if (currentDate.after(appointmentDate))
             throw new CliniqueException(CliniqueException.MyException.INVALIED_APPOINTMENT_DATE, "This doctor are not present in clinique");
     }
 }

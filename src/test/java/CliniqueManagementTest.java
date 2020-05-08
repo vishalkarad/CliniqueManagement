@@ -12,9 +12,13 @@ import java.text.ParseException;
 
 public class CliniqueManagementTest {
 
+    // Reference
     DoctorService doctor;
     PatientServices patient;
+
+    // file path
     public String appointmentFilePath = "F:\\bridgelabze\\cliniqueManagementApplication\\src\\test\\resources\\appointment\\appointmentList.json";
+
     @Before
     public void setUp() {
         doctor = new DoctorService("F:\\bridgelabze\\cliniqueManagementApplication\\src\\test\\resources\\doctors\\doctorList.json");
@@ -23,7 +27,7 @@ public class CliniqueManagementTest {
 
     @Test
     public void givenDoctorInformation_WhenAddDoctor_ThenReturnSuccessMessage() throws CliniqueException {
-        String result = doctor.addDoctorEntry(new Doctor("D103","vaibhav","8956561313","parli","PM","skin"));
+        String result = doctor.addDoctorEntry(new Doctor("D104","nikhil","8956561515","parli","BOTH","DERMATOLOGISTS"));
         Assert.assertEquals("Add Records Successfully",result);
     }
 
@@ -41,8 +45,8 @@ public class CliniqueManagementTest {
 
     @Test
     public void givenDoctorId_WhenSearch_ThenReturnSuccessMessage()  {
-        int result = doctor.searchDoctorEntry("D102");
-        Assert.assertEquals(2,result);
+        int result = doctor.searchDoctorEntry("D101");
+        Assert.assertEquals(1,result);
     }
 
     @Test
@@ -58,14 +62,14 @@ public class CliniqueManagementTest {
     }
 
     @Test
-    public void givenDoctorIdAndDate_WhenFixAppointment_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException {
+    public void givenDoctorIdAndDate_WhenFixAppointment_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException, ClassNotFoundException {
         AppointmentService appoint = new AppointmentService();
         String result = appoint.appointment("D103","P3","10/12/2020");
         Assert.assertEquals("Appointment fix",result);
     }
 
     @Test
-    public void givenDoctorId_WhenSearchDoctorPatient_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException {
+    public void givenDoctorId_WhenSearchDoctorPatient_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException, ClassNotFoundException {
         DoctorService doctorService = new DoctorService(appointmentFilePath);
         int result = doctorService.doctorPatientReport("D103");
         Assert.assertEquals(1,result);

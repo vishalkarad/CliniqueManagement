@@ -13,6 +13,9 @@ public class Doctor {
     String doctor_Availability;
     String doctor_Specialist;
 
+    public Doctor(){
+
+    }
     // check valid mobile number or not
     public boolean isValid(String mobileNumber) {
         Pattern pattern = Pattern.compile("[7-9][0-9]{9}");
@@ -58,5 +61,17 @@ public class Doctor {
 
     public String getDoctor_Specialist() {
         return doctor_Specialist;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "doctor_Id='" + doctor_Id + '\'' +
+                ", doctor_Name='" + doctor_Name + '\'' +
+                ", doctor_MobileNumber='" + doctor_MobileNumber + '\'' +
+                ", doctor_Address='" + doctor_Address + '\'' +
+                ", doctor_Availability='" + doctor_Availability + '\'' +
+                ", doctor_Specialist='" + doctor_Specialist + '\'' +
+                '}';
     }
 }

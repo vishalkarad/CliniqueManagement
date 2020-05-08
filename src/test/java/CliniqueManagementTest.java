@@ -1,6 +1,6 @@
 import com.bridgelabz.exception.CliniqueException;
 import com.bridgelabz.pojo.Doctor;
-import com.bridgelabz.pojo.Patients;
+import com.bridgelabz.pojo.Patient;
 import com.bridgelabz.services.AppointmentService;
 import com.bridgelabz.services.DoctorService;
 import com.bridgelabz.services.PatientServices;
@@ -32,8 +32,8 @@ public class CliniqueManagementTest {
     }
 
     @Test
-    public void givenPatientsInformation_WhenAddPatients_ThenReturnSuccessMessage() {
-        String result = patient.addPatientEntry(new Patients("P3", "rohan", "9874563216", 40));
+    public void givenPatientsInformation_WhenAddPatients_ThenReturnSuccessMessage() throws CliniqueException {
+        String result = patient.addPatientEntry(new Patient("P3", "rohan", "9874563216", 40));
         Assert.assertEquals("Add Records Successfully",result);
     }
 
@@ -80,5 +80,11 @@ public class CliniqueManagementTest {
         String doctorId = doctor.popularDoctor();
         int result = doctor.searchDoctorEntry(doctorId);
         Assert.assertEquals(1,result);
+    }
+
+    @Test
+    public void givenDoctor_WhenSearchPopularSpecialization_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException, ClassNotFoundException {
+        String specialization = doctor.popularSpecialization();
+        Assert.assertEquals("DERMATOLOGISTS",specialization);
     }
 }

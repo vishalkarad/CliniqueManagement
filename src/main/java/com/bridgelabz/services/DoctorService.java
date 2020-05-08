@@ -62,4 +62,15 @@ public class DoctorService extends CliniqueManagementMain {
         return map.keySet().stream().filter(key -> Collections.max(map.values()).equals(map.get(key)))
                 .findFirst().get();
     }
+
+    // Popular specialization
+    public String popularSpecialization() throws IOException, ClassNotFoundException {
+        List<Doctor> list = readFile(Doctor.class);
+        Map<String, Integer> map = new HashMap<>();
+        list.stream().forEach(value -> {
+            map.put(value.getDoctor_Specialist(), searchDoctorEntry(value.getDoctor_Specialist()));
+        });
+        return map.keySet().stream().filter(key -> Collections.max(map.values()).equals(map.get(key)))
+                .findFirst().get();
+    }
 }

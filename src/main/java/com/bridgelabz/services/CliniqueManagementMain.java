@@ -1,8 +1,6 @@
 package com.bridgelabz.services;
 
-import com.bridgelabz.exception.CliniqueException;
 import com.bridgelabz.interfaces.CliniqueInterface;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -15,22 +13,24 @@ public class CliniqueManagementMain implements CliniqueInterface {
 
     // Variables
     String filePath;
+
+    // Objects
     File file;
     ObjectMapper mapper = new ObjectMapper();
 
     // Constructor
-    public CliniqueManagementMain(String filePath) {
+    public <T> CliniqueManagementMain(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
     // Add record
     @Override
-    public <T> String addRecord(T object) {
+    public <T> String addRecord(T object, Class<?> className) {
         try {
             List<T> list = new ArrayList<>();
             if (file.length() > 0)
-                list = readFile();
+                list = readFile(className);
             list.add(object);
             saveRecord(list);
             return "Add Records Successfully";
@@ -42,17 +42,16 @@ public class CliniqueManagementMain implements CliniqueInterface {
 
     // Search Record
     @Override
-    public int searchRecord(String serchValue) {
+    public int searchRecord(String serchValue, Class<?> className) {
         try {
             AtomicInteger count = new AtomicInteger();
-            readFile().stream().forEach(value -> {
+            readFile(className).stream().forEach(value -> {
                 if (value.toString().contains(serchValue)) {
                     System.out.println(value.toString());
                     count.getAndIncrement();
                 }
             });
             return count.get();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,9 +60,9 @@ public class CliniqueManagementMain implements CliniqueInterface {
 
     // Search whole list
     @Override
-    public String listOfAllRecords() {
+    public String listOfAllRecords(Class<?> className) {
         try {
-            readFile().stream().forEach(value -> System.out.println(value.toString()));
+            readFile(className).stream().forEach(value -> System.out.println(value.toString()));
             return "Search record";
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,19 +71,13 @@ public class CliniqueManagementMain implements CliniqueInterface {
     }
 
     // Read file
-    private <T> List<T> readFile() {
-        try {
-            if (file.length() == 0)
-                throw new CliniqueException(CliniqueException.MyException.FILE_EMPTY, "File is Empty");
-            return mapper.readValue(file, new TypeReference<ArrayList<T>>() {
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    @Override
+    public <T> List<T> readFile(Class<?> target) throws IOException, ClassNotFoundException {
+        return mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, Class.forName(target.getName())));
     }
 
     // Save Records In File
+    @Override
     public <T> void saveRecord(List<T> list) throws IOException {
         mapper.writeValue(file, list);
     }

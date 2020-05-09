@@ -6,10 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Patient {
-    String patientId;
-    String patientName;
-    String patientMobileNumber;
-    int patientAge;
+    private String patientId;
+    private String patientName;
+    private String patientMobileNumber;
+    private int patientAge;
 
     // Default constructor
     public Patient() {

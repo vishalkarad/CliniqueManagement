@@ -7,12 +7,12 @@ import java.util.regex.Pattern;
 
 public class Doctor {
 
-    String doctor_Id;
-    String doctor_Name;
-    String doctor_MobileNumber;
-    String doctor_Address;
-    String doctor_Availability;
-    String doctor_Specialist;
+    private String doctor_Id;
+    private String doctor_Name;
+    private String doctor_MobileNumber;
+    private String doctor_Address;
+    private String doctor_Availability;
+    private String doctor_Specialist;
 
     // Default constructor
     public Doctor() {

@@ -1,1 +1,4 @@
-[{"doctor_Id":"D101","doctor_Name":"sonal","doctor_MobileNumber":"8956561414","doctor_Address":"parli","doctor_Availability":"morning","doctor_Specialist":"skin"},{"doctor_Id":"D102","doctor_Name":"shubham","doctor_MobileNumber":"8956561313","doctor_Address":"parli","doctor_Availability":"PM","doctor_Specialist":"skin"},{"doctor_Id":"D102","doctor_Name":"shubham","doctor_MobileNumber":"8956561313","doctor_Address":"parli","doctor_Availability":"PM","doctor_Specialist":"skin"}]
+[{"doctor_Id":"D101","doctor_Name":"sonal","doctor_MobileNumber":"8956561414","doctor_Address":"parli","doctor_Availability":"AM","doctor_Specialist":"SKIN"},
+  {"doctor_Id":"D102","doctor_Name":"shubham","doctor_MobileNumber":"8956561313","doctor_Address":"parli","doctor_Availability":"PM","doctor_Specialist":"DERMATOLOGISTS"},
+  {"doctor_Id":"D103","doctor_Name":"vaibhav","doctor_MobileNumber":"8956561313","doctor_Address":"parli","doctor_Availability":"PM","doctor_Specialist":"DERMATOLOGISTS"},
+  {"doctor_Id":"D104","doctor_Name":"nikhil","doctor_MobileNumber":"8956561515","doctor_Address":"parli","doctor_Availability":"BOTH","doctor_Specialist":"DERMATOLOGISTS"}]

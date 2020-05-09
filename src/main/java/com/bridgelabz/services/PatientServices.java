@@ -1,6 +1,6 @@
 package com.bridgelabz.services;
 
-import com.bridgelabz.pojo.Patients;
+import com.bridgelabz.pojo.Patient;
 
 public class PatientServices extends CliniqueManagementMain {
 
@@ -10,17 +10,17 @@ public class PatientServices extends CliniqueManagementMain {
     }
 
     // Add patient
-    public String  addPatientEntry(Patients patients){
-        return super.addRecord(patients);
+    public String addPatientEntry(Patient patients) {
+        return super.addRecord(patients, Patient.class);
     }
 
     // search patient
-    public int searchPatientRecord(String serchValue) {
-        return super.searchRecord(serchValue);
+    public int searchPatientRecord(String searchValue) {
+        return super.searchRecord(searchValue, Patient.class);
     }
 
     // list of all patientList
-    public String listOfAllPatientRecords(){
-        return super.listOfAllRecords();
+    public String listOfAllPatientRecords() {
+        return super.listOfAllRecords(Patient.class);
     }
 }

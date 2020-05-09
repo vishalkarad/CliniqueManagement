@@ -1,45 +1,66 @@
 package com.bridgelabz.pojo;
 
-public class Patients {
-    String patients_Id;
-    String patients_Name;
-    String patients_MobileNumber;
-    int patient_Age;
+import com.bridgelabz.exception.CliniqueException;
 
-    public Patients(){
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Patient {
+    String patientId;
+    String patientName;
+    String patientMobileNumber;
+    int patientAge;
+
+    // Default constructor
+    public Patient() {
 
     }
-    public Patients(String patients_Id, String patients_Name, String patients_MobileNumber, int patient_Age) {
-        this.patients_Id = patients_Id;
-        this.patients_Name = patients_Name;
-        this.patients_MobileNumber = patients_MobileNumber;
-        this.patient_Age = patient_Age;
+
+    // Check valid mobile number or not
+    public boolean isValid(String mobileNumber) {
+        Pattern pattern = Pattern.compile("[7-9][0-9]{9}");
+        Matcher matcher = pattern.matcher(mobileNumber);
+        return (matcher.find() && matcher.group().equals(mobileNumber));
+    }
+
+    // Constructor to assign patient properties
+    public Patient(String patientId, String patientName, String patientMobileNumber, int patientAge) throws CliniqueException {
+        this.patientId = patientId;
+        this.patientName = patientName;
+        this.patientMobileNumber = patientMobileNumber;
+        this.patientAge = patientAge;
+        if (isValid(patientMobileNumber))
+            this.patientMobileNumber = patientMobileNumber;
+        else
+            throw new CliniqueException(CliniqueException.MyException.INVALID_MOBILE_NUMBER, "Enter valid mobile Number");
     }
 
     // Getter methods
-    public String getPatients_Id() {
-        return patients_Id;
+
+
+    public String getPatientId() {
+        return patientId;
     }
 
-    public String getPatients_Name() {
-        return patients_Name;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public String getPatients_MobileNumber() {
-        return patients_MobileNumber;
+    public String getPatientMobileNumber() {
+        return patientMobileNumber;
     }
 
-    public int getPatient_Age() {
-        return patient_Age;
+    public int getPatientAge() {
+        return patientAge;
     }
 
     @Override
     public String toString() {
         return "Patients{" +
-                "patients_Id='" + patients_Id + '\'' +
-                ", patients_Name='" + patients_Name + '\'' +
-                ", patients_MobileNumber='" + patients_MobileNumber + '\'' +
-                ", patient_Age=" + patient_Age +
+                "patientId='" + patientId + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", patientMobileNumber='" + patientMobileNumber + '\'' +
+                ", patientAge=" + patientAge +
                 '}';
     }
 }

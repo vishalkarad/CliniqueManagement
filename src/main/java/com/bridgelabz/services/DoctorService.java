@@ -29,7 +29,7 @@ public class DoctorService extends CliniqueManagementMain {
 
     // search doctor record
     public int searchDoctorEntry(String serchValue) {
-        return super.searchRecord(serchValue, Doctor.class);
+        return super.searchRecord(serchValue,Doctor.class);
     }
 
     // list of all doctor records

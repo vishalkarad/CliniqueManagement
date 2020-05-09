@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Doctor {
+
     String doctor_Id;
     String doctor_Name;
     String doctor_MobileNumber;
@@ -13,17 +14,19 @@ public class Doctor {
     String doctor_Availability;
     String doctor_Specialist;
 
-    public Doctor(){
+    // Default constructor
+    public Doctor() {
 
     }
-    // check valid mobile number or not
+
+    // Check valid mobile number or not
     public boolean isValid(String mobileNumber) {
         Pattern pattern = Pattern.compile("[7-9][0-9]{9}");
         Matcher matcher = pattern.matcher(mobileNumber);
         return (matcher.find() && matcher.group().equals(mobileNumber));
     }
-    // constructor to assign doctor properties
 
+    // Constructor to assign doctor properties
     public Doctor(String doctor_Id, String doctor_Name, String doctor_MobileNumber, String doctor_Address,
                   String doctor_Availability, String doctor_Specialist) throws CliniqueException {
         this.doctor_Id = doctor_Id;
@@ -34,7 +37,7 @@ public class Doctor {
         if (isValid(doctor_MobileNumber))
             this.doctor_MobileNumber = doctor_MobileNumber;
         else
-            throw new CliniqueException(CliniqueException.MyException.INVALIED_MOBILE_NUMBER, "Enter valied mobile Number");
+            throw new CliniqueException(CliniqueException.MyException.INVALID_MOBILE_NUMBER, "Enter valid mobile Number");
     }
 
     // Getter method

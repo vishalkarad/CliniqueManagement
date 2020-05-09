@@ -7,6 +7,7 @@ public class Appointment {
     private String appointment_Date;
     private String patient_Id;
 
+    // Constructor to assign appointment properties
     public Appointment(int appointment_Number, String doctor_Id, String appointment_Date, String patient_Id) {
         this.appointment_Number = appointment_Number;
         this.doctor_Id = doctor_Id;
@@ -14,6 +15,7 @@ public class Appointment {
         this.patient_Id = patient_Id;
     }
 
+    // Default constructor
     public Appointment() {
     }
 

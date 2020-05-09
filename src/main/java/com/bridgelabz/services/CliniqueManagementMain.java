@@ -42,11 +42,13 @@ public class CliniqueManagementMain implements CliniqueInterface {
 
     // Search Record
     @Override
-    public int searchRecord(String serchValue, Class<?> className) {
+    public <T> int searchRecord(String searchValue, Class<?> className) {
         try {
             AtomicInteger count = new AtomicInteger();
-            readFile(className).stream().forEach(value -> {
-                if (value.toString().contains(serchValue)) {
+            List<T> list = new ArrayList<>();
+            list = readFile(className);
+            list.stream().forEach(value -> {
+                if (value.toString().contains(searchValue)) {
                     System.out.println(value.toString());
                     count.getAndIncrement();
                 }

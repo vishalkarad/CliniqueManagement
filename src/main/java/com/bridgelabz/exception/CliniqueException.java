@@ -1,10 +1,11 @@
 package com.bridgelabz.exception;
 
-public class CliniqueException extends Exception{
+public class CliniqueException extends Exception {
 
-    public enum MyException{
-        INVALIED_MOBILE_NUMBER,FILE_EMPTY,INVALIED_ID,INVALIED_APPOINTMENT_DATE
+    public enum MyException {
+        INVALID_MOBILE_NUMBER, FILE_EMPTY, INVALID_ID, INVALID_APPOINTMENT_DATE
     }
+
     MyException type;
 
     public CliniqueException(MyException type, String message) {

@@ -1,6 +1,6 @@
 import com.bridgelabz.exception.CliniqueException;
-import com.bridgelabz.pojo.Doctor;
-import com.bridgelabz.pojo.Patient;
+import com.bridgelabz.model.Doctor;
+import com.bridgelabz.model.Patient;
 import com.bridgelabz.services.AppointmentService;
 import com.bridgelabz.services.DoctorService;
 import com.bridgelabz.services.PatientServices;
@@ -108,7 +108,7 @@ public class CliniqueManagementTest {
     public void givenDoctorId_WhenSearchDoctorPatient_ThenReturnSuccessMessage() throws IOException, CliniqueException, ParseException, ClassNotFoundException {
         DoctorService doctorService = new DoctorService(appointmentFilePath);
         int result = doctorService.doctorPatientReport("D103");
-        Assert.assertEquals(1, result);
+        Assert.assertEquals(3, result);
     }
 
     @Test

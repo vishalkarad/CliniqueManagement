@@ -1,4 +1,4 @@
-package com.bridgelabz.pojo;
+package com.bridgelabz.model;
 
 import com.bridgelabz.exception.CliniqueException;
 
@@ -13,7 +13,6 @@ public class Patient {
 
     // Default constructor
     public Patient() {
-
     }
 
     // Check valid mobile number or not
@@ -27,7 +26,6 @@ public class Patient {
     public Patient(String patientId, String patientName, String patientMobileNumber, int patientAge) throws CliniqueException {
         this.patientId = patientId;
         this.patientName = patientName;
-        this.patientMobileNumber = patientMobileNumber;
         this.patientAge = patientAge;
         if (isValid(patientMobileNumber))
             this.patientMobileNumber = patientMobileNumber;
@@ -36,8 +34,6 @@ public class Patient {
     }
 
     // Getter methods
-
-
     public String getPatientId() {
         return patientId;
     }

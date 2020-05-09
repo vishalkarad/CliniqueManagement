@@ -1,6 +1,6 @@
 package com.bridgelabz.services;
 
-import com.bridgelabz.pojo.Patient;
+import com.bridgelabz.model.Patient;
 
 public class PatientServices extends CliniqueManagementMain {
 

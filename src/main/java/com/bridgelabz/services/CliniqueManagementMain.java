@@ -1,7 +1,6 @@
 package com.bridgelabz.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,9 +43,7 @@ public class CliniqueManagementMain implements CliniqueInterface {
     public <T> int searchRecord(String searchValue, Class<?> className) {
         try {
             AtomicInteger count = new AtomicInteger();
-            List<T> list = new ArrayList<>();
-            list = readFile(className);
-            list.stream().forEach(value -> {
+            readFile(className).stream().forEach(value -> {
                 if (value.toString().contains(searchValue)) {
                     System.out.println(value.toString());
                     count.getAndIncrement();

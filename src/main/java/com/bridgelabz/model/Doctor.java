@@ -1,4 +1,4 @@
-package com.bridgelabz.pojo;
+package com.bridgelabz.model;
 
 import com.bridgelabz.exception.CliniqueException;
 
@@ -16,7 +16,6 @@ public class Doctor {
 
     // Default constructor
     public Doctor() {
-
     }
 
     // Check valid mobile number or not

@@ -1,8 +1,8 @@
 package com.bridgelabz.services;
 
 import com.bridgelabz.exception.CliniqueException;
-import com.bridgelabz.pojo.Appointment;
-import com.bridgelabz.pojo.Doctor;
+import com.bridgelabz.model.Appointment;
+import com.bridgelabz.model.Doctor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -54,6 +54,7 @@ public class AppointmentService {
             throw new CliniqueException(CliniqueException.MyException.INVALID_APPOINTMENT_DATE, "This doctor are not present in clinique");
     }
 
+    // Check doctor availability time
     public void availabilityTime(String doctorId) throws IOException, ClassNotFoundException {
         List<Doctor> doctorList = doctor.readFile(Doctor.class);
         final String[] availability = {null};

@@ -1,4 +1,4 @@
-package com.bridgelabz.pojo;
+package com.bridgelabz.model;
 
 public class Appointment {
 

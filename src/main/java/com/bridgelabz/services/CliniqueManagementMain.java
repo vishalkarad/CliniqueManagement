@@ -1,6 +1,5 @@
 package com.bridgelabz.services;
 
-import com.bridgelabz.interfaces.CliniqueInterface;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
